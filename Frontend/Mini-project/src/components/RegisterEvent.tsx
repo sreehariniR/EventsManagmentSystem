@@ -1,6 +1,6 @@
 import { useState, useContext } from "react"
 import { EventContext } from "../context/EventContext"
-
+import API from "../api/api"
 export default function RegisterEvent(){
 
 const { facultyID } = useContext(EventContext)
@@ -21,7 +21,7 @@ const payload = {
 facultyID: facultyID
 }
 
-await fetch("http://localhost:8082/faculty/events",{
+await fetch(`${API.faculty}/events`,{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify(payload)

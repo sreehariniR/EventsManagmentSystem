@@ -1,19 +1,19 @@
 import { useState, useContext } from "react"
 import { EventContext } from "../context/EventContext"
-
+import API from "../api/api"
 export default function ViewMonth(){
 
   const { facultyID } = useContext(EventContext)
 
   const [month, setMonth] = useState("")
-  const [events, setEvents] = useState<any[]>([])  // ✅ FIXED
+  const [events, setEvents] = useState<any[]>([])  
 
   const fetchEvents = async () => {
 
     try {
 
       const res = await fetch(
-        `http://localhost:8082/faculty/eventsbymonth/${month}/${facultyID}`
+        `${API.faculty}/faculty/eventsbymonth/${month}/${facultyID}`
       )
 
       if(!res.ok) throw new Error()

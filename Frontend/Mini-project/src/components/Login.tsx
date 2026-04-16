@@ -1,6 +1,7 @@
 import { useState, useContext } from "react"
 import { Link,useNavigate } from "react-router-dom"
 import { EventContext } from "../context/EventContext"
+import API from "../api/api"
 
 type LoginData = {
   email: string
@@ -24,8 +25,8 @@ e.preventDefault()
 setError("")
 
 try{
-
-const res = await fetch("http://localhost:8082/facultylogin/",{
+console.log(`${API.faculty}/facultylogin/`)
+const res = await fetch(`${API.faculty}/facultylogin/`,{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify(login)

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-
+import API from "../api/api"
 type RegisterData = {
   facultyID: string
   facultyName: string
@@ -27,39 +27,36 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
 }
 
 const handleSubmit = async (e:React.FormEvent)=>{
-e.preventDefault()
+  e.preventDefault()
 
-setError("")
-setMessage("")
+  setError("")
+  setMessage("")
 
-try{
+  try{
 
-const response = await fetch("http://localhost:8082/faculty/",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify(formData)
-})
+    const response = await fetch(`${API.faculty}/faculty/`, {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(formData)
+    })
 
-if(!response.ok){
-throw new Error()
-}
+    const data = await response.json()
 
-await response.json()
+    if(!response.ok){
+      throw new Error(data.message || "Registration failed")
+    }
 
-setMessage("Registered successfully")
+    setMessage("Registered successfully")
 
-setTimeout(()=>{
-navigate("/login")
-},1000)
+    setTimeout(()=>{
+      navigate("/facultylogin")
+    },1000)
 
-}catch{
-
-setError("Registration failed")
-
-}
-
+  }catch(err:any){
+    setError(err.message || "Registration failed")
+  }
 }
 
 return(
@@ -84,7 +81,7 @@ Faculty Portal — Register to get started
 <form onSubmit={handleSubmit}>
 
 <input
-name="facultyId"
+name="facultyID"
 placeholder="Faculty ID"
 className="w-full mb-3 p-2.5 border border-gray-300 rounded-md text-sm outline-none"
 onChange={handleChange}
@@ -98,7 +95,7 @@ onChange={handleChange}
 />
 
 <input
-name="emailId"
+name="email"
 placeholder="Email ID"
 className="w-full mb-3 p-2.5 border border-gray-300 rounded-md text-sm outline-none"
 onChange={handleChange}

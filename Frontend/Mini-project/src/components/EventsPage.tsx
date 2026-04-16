@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { EventContext } from "../context/EventContext"
-
+import API from "../api/api"
 export default function EventsPage() {
 
   const { events, facultyID, fetchEvents } = useContext(EventContext)
@@ -14,7 +14,7 @@ export default function EventsPage() {
   const deleteEvent = async (rollNo: string, eventName: string) => {
     try {
       const res = await fetch(
-        `http://localhost:8082/faculty/${facultyID}/${rollNo}/${eventName}`,
+        `${API.faculty}/faculty/${facultyID}/${rollNo}/${eventName}`,
         { method: "DELETE" }
       )
 

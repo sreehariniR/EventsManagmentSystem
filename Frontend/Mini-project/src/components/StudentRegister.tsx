@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-
+import API from "../api/api"
 export default function StudentRegister() {
 
 const navigate = useNavigate()
@@ -22,34 +22,38 @@ setForm({...form,[e.target.name]:e.target.value})
 
 const handleSubmit = async (e:React.FormEvent)=>{
 
-e.preventDefault()
-setLoading(true)
-setMsg(null)
+  e.preventDefault()
+  setLoading(true)
+  setMsg(null)
 
-try{
+  try{
 
-const res = await fetch("http://localhost:8081/api/student_register/",{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify(form)
-})
+    const res = await fetch(`${API.student}/api/student_register/`,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(form)
+    })
 
-if(!res.ok) throw new Error()
+    const data = await res.json()
 
-setMsg({text:"Registration successful! Redirecting…",ok:true})
+    if(!res.ok){
+      throw new Error(data.message || "Registration failed")
+    }
 
-setTimeout(()=>navigate("/student"),1200)
+    setMsg({text:"Registration successful! Redirecting…",ok:true})
 
-}catch{
+    setTimeout(()=>navigate("/student"),1200)
 
-setMsg({text:"Registration failed. Please try again.",ok:false})
+  }catch(err:any){
 
-}finally{
+    setMsg({
+      text: err.message || "Registration failed",
+      ok:false
+    })
 
-setLoading(false)
-
-}
-
+  }finally{
+    setLoading(false)
+  }
 }
 
 const fields=[

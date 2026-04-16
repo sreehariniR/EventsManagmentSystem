@@ -1,6 +1,6 @@
 import { useState, useContext } from "react"
 import { EventContext } from "../context/EventContext"
-
+import API from "../api/api"
 export default function SingleStudentView(){
 
 const { facultyID } = useContext(EventContext)
@@ -13,7 +13,7 @@ const fetchEvents = async ()=>{
 try{
 
 const res = await fetch(
-`http://localhost:8082/faculty/events/${facultyID}/${rollNo}`
+`${API.faculty}/faculty/events/${facultyID}/${rollNo}`
 )
 
 if(!res.ok) throw new Error()

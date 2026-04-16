@@ -1,7 +1,7 @@
 import { useState, useContext } from "react"
 import { useLocation } from "react-router-dom"
 import { EventContext } from "../context/EventContext"
-
+import API from "../api/api"
 export default function UpdateEvent(){
 
 const { facultyID } = useContext(EventContext)
@@ -23,7 +23,7 @@ const updateEvent = async ()=>{
 try{
 
 const res = await fetch(
-`http://localhost:8082/faculty/${facultyID}/${event.rollNo}/${event.eventName}`,
+`${API.faculty}/faculty/${facultyID}/${event.rollNo}/${event.eventName}`,
 {
 method:"PUT",
 headers:{"Content-Type":"application/json"},

@@ -1,4 +1,5 @@
 package org.example.events.controller;
+
 import org.example.events.model.EventModel;
 import org.example.events.service.EventService;
 import org.springframework.http.HttpStatus;

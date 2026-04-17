@@ -8,4 +8,8 @@ import org.springframework.stereotype.Repository;
 public interface StudentRepository extends MongoRepository<RegisterModel,String> {
     public void deleteByRollNo(String rollNo);
     public RegisterModel findByEmail(String email);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByRollNo(String rollNo);
 }

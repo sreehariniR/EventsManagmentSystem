@@ -25,7 +25,10 @@ public class FacultyLoginService {
             return null;
         }
         else if (faculty.getPassword().equals(loginDetails.getPassword())){
-            String url="http://localhost:8080/api/stu_events/faculty/"+faculty.getFacultyID();
+            String eventServiceUrl = System.getenv("EVENT_SERVICE_URL") != null
+                    ? System.getenv("EVENT_SERVICE_URL")
+                    : "http://localhost:8080";
+            String url = eventServiceUrl + "/api/stu_events/faculty/" + faculty.getFacultyID();
             ResponseEntity<EventModel[]> response=restTemplate.getForEntity(url,EventModel[].class);
             if (response.getStatusCode().is2xxSuccessful()){
                 assert response.getBody() != null;

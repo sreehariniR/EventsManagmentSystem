@@ -22,6 +22,12 @@ public class FacultyService {
         this.repo=repo;
         this.restTemplate=restTemplate;
     }
+
+    private String getEventServiceUrl() {
+        String url = System.getenv("EVENT_SERVICE_URL");
+        return url != null ? url : "http://localhost:8080";
+    }
+
     public FacultyModel registerFaculty(FacultyModel faculty){
 
         if(faculty.getFacultyName() == null || faculty.getFacultyName().isBlank()){
@@ -61,7 +67,7 @@ public class FacultyService {
         return repo.save(faculty);
     }
      public EventModel addEvent(EventModel event,String facultyID){
-         String url="http://localhost:8080/api/stu_events/";
+         String url = getEventServiceUrl() + "/api/stu_events/";
          ResponseEntity<EventModel> response=restTemplate.postForEntity(url,event,EventModel.class);
          if( response.getStatusCode().is2xxSuccessful()){
              return response.getBody();
@@ -69,7 +75,7 @@ public class FacultyService {
          return null;
      }
     public List<EventModel> getEvents(String facultyID){
-        String url="http://localhost:8080/api/stu_events/faculty/"+facultyID;
+        String url = getEventServiceUrl() + "/api/stu_events/"+facultyID;
         ResponseEntity<EventModel[]> response=restTemplate.getForEntity(url,EventModel[].class);
         if( response.getStatusCode().is2xxSuccessful()){
             return Arrays.asList(response.getBody());
@@ -78,7 +84,7 @@ public class FacultyService {
     }
 
     public List<EventModel> viewEventsByMonth(String facultyID,String month){
-         String url="http://localhost:8080/api/stu_events/eventsByMonth/"+facultyID+"/"+month;
+        String url = getEventServiceUrl() + "/api/stu_events/"+facultyID+"/"+month;
          ResponseEntity<EventModel[]> response=restTemplate.getForEntity(url,EventModel[].class);
          if( response.getStatusCode().is2xxSuccessful()){
              return Arrays.asList(response.getBody());
@@ -88,13 +94,13 @@ public class FacultyService {
 
 
     public void deleteEvent(String facultyID, String rollNo, String eventName) {
-        String url = "http://localhost:8080/api/stu_events/" + facultyID + "/" + rollNo + "/" + eventName;
+        String url = getEventServiceUrl() + "/api/stu_events/"+ facultyID + "/" + rollNo + "/" + eventName;
         restTemplate.delete(url);
     }
 
 
     public EventModel updateEvent(String facultyID, String rollNo, String eventName, EventModel updatedEvent) {
-        String url = "http://localhost:8080/api/stu_events/" + facultyID + "/" + rollNo + "/" + eventName;
+        String url = getEventServiceUrl() + "/api/stu_events/"+ facultyID + "/" + rollNo + "/" + eventName;
         HttpEntity<EventModel> request = new HttpEntity<>(updatedEvent);
         ResponseEntity<EventModel> response =
                 restTemplate.exchange(url, HttpMethod.PUT, request, EventModel.class);
@@ -105,7 +111,7 @@ public class FacultyService {
     }
 
     public EventModel registerEvent(EventModel event) {
-        String url="http://localhost:8080/api/stu_events/";
+        String url = getEventServiceUrl() + "/api/stu_events/";
         ResponseEntity<EventModel> response=restTemplate.postForEntity(url,event,EventModel.class);
         if( response.getStatusCode().is2xxSuccessful()){
             return response.getBody();
@@ -115,7 +121,7 @@ public class FacultyService {
 
 
     public List<EventModel> getEventsByRollNo(String facultyID, String rollNo) {
-        String url="http://localhost:8080/api/stu_events/faculty/"+facultyID+"/"+rollNo;
+        String url = getEventServiceUrl() + "/api/stu_events/"+facultyID+"/"+rollNo;
         ResponseEntity<EventModel[]> response=restTemplate.getForEntity(url,EventModel[].class);
         if(response.getStatusCode().is2xxSuccessful()){
             return Arrays.asList(response.getBody());

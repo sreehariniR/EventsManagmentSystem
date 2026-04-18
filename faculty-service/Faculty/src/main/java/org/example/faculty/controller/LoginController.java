@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "https://events-managment-system-teti.vercel.app")
 @RestController
 @RequestMapping("/facultylogin")
 public class LoginController {

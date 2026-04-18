@@ -21,7 +21,7 @@ const payload = {
 facultyID: facultyID
 }
 
-await fetch(`${API.faculty}/events/`,{
+await fetch(`${API.faculty}/faculty/events`,{
 method:"POST",
 headers:{"Content-Type":"application/json"},
 body:JSON.stringify(payload)

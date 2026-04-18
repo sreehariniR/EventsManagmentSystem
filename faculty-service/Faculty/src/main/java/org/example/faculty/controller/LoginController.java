@@ -1,6 +1,6 @@
 package org.example.faculty.controller;
 
-import org.example.events.model.EventModel;
+import org.example.faculty.DTO.EventModel;
 import org.example.faculty.model.FacultyModel;
 import org.example.faculty.model.LoginModel;
 import org.example.faculty.service.FacultyLoginService;

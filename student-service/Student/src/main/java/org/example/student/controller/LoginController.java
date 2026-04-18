@@ -1,6 +1,6 @@
 package org.example.student.controller;
 
-import org.example.events.model.EventModel;
+import org.example.student.DTO.EventModel;
 import org.example.student.model.LoginModel;
 import org.example.student.service.LoginService;
 import org.springframework.web.bind.annotation.*;

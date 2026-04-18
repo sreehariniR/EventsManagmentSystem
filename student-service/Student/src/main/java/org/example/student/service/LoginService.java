@@ -1,7 +1,6 @@
 package org.example.student.service;
 
-import org.example.events.model.EventModel;
-import org.example.events.repository.EventRepository;
+import org.example.student.DTO.EventModel;
 import org.example.student.Rest.RestTemplateConfig;
 import org.example.student.model.LoginModel;
 import org.example.student.model.RegisterModel;

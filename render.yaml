@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: faculty-service
+    runtime: docker
+    rootDir: EventsManagmentSystem/faculty-service/Faculty
+    envVars:
+      - key: SPRING_DATA_MONGODB_URI
+        value: mongodb+srv://emsuser:Ems@12345@ems.djyslsl.mongodb.net/emsdb?appName=ems
+
+  - type: web
+    name: student-service
+    runtime: docker
+    rootDir: EventsManagmentSystem/student-service/Student
+    envVars:
+      - key: SPRING_DATA_MONGODB_URI
+        value: mongodb+srv://emsuser:Ems@12345@ems.djyslsl.mongodb.net/emsdb?appName=ems
+
+  - type: web
+    name: event-service
+    runtime: docker
+    rootDir: EventsManagmentSystem/event-service/Event
+    envVars:
+      - key: SPRING_DATA_MONGODB_URI
+        value: mongodb+srv://emsuser:Ems@12345@ems.djyslsl.mongodb.net/emsdb?appName=ems

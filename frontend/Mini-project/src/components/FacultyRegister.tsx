@@ -34,7 +34,7 @@ const handleSubmit = async (e:React.FormEvent)=>{
 
   try{
 
-    const response = await fetch(`${API.faculty}/faculty/`, {
+    const response = await fetch(`${API.faculty}/`, {
       method:"POST",
       headers:{
         "Content-Type":"application/json"

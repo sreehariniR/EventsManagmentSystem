@@ -34,7 +34,7 @@ const handleSubmit = async (e:React.FormEvent)=>{
 
   try{
 
-    const response = await fetch(`${API.faculty}/`, {
+    const response = await fetch(`${API.faculty}/faculty/`, {
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -47,6 +47,7 @@ const handleSubmit = async (e:React.FormEvent)=>{
     if(!response.ok){
       throw new Error(data.message || "Registration failed")
     }
+    console.log("API:", API.faculty)
 
     setMessage("Registered successfully")
 

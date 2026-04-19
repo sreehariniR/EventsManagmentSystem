@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "https://events-managment-system-teti.vercel.app")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/student_register")
 public class RegisterController {

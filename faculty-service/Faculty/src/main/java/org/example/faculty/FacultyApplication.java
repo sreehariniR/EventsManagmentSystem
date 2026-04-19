@@ -1,6 +1,9 @@
 package org.example.faculty;
 
+import jakarta.annotation.PostConstruct;
+
 import org.jspecify.annotations.NonNull;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -13,16 +16,15 @@ public class FacultyApplication {
     public static void main(String[] args) {
         SpringApplication.run(FacultyApplication.class, args);
     }
+    @Value("${spring.data.mongodb.uri:NOT_FOUND}")
+    private String mongoUri;
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(@NonNull CorsRegistry registry) {
-                registry.addMapping("/**")
-                        .allowedOrigins("https://events-managment-system-teti.vercel.app")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
-            }
-        };
+
+
+    @PostConstruct
+    public void checkMongo() {
+        System.out.println("MONGO URI = " + mongoUri);
     }
+
+
 }
